@@ -59,8 +59,8 @@ void print_array(int n,
   POLYBENCH_DUMP_BEGIN("table");
   for (i = 0; i < n; i++) {
     for (j = i; j < n; j++) {
-      if (t % 20 == 0) fprintf (POLYBENCH_DUMP_TARGET, "\n");
-      fprintf (POLYBENCH_DUMP_TARGET, DATA_PRINTF_MODIFIER, table[i][j]);
+      if (t % 20 == 0) printf( "\n");
+      printf( DATA_PRINTF_MODIFIER, table[i][j]);
       t++;
     }
   }

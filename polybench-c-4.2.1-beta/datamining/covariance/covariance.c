@@ -50,8 +50,8 @@ void print_array(int m,
   POLYBENCH_DUMP_BEGIN("cov");
   for (i = 0; i < m; i++)
     for (j = 0; j < m; j++) {
-      if ((i * m + j) % 20 == 0) fprintf (POLYBENCH_DUMP_TARGET, "\n");
-      fprintf (POLYBENCH_DUMP_TARGET, DATA_PRINTF_MODIFIER, cov[i][j]);
+      if ((i * m + j) % 20 == 0) printf( "\n");
+      printf( DATA_PRINTF_MODIFIER, cov[i][j]);
     }
   POLYBENCH_DUMP_END("cov");
   POLYBENCH_DUMP_FINISH;

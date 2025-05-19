@@ -58,8 +58,8 @@ void print_array(int ni, int nl,
   POLYBENCH_DUMP_BEGIN("G");
   for (i = 0; i < ni; i++)
     for (j = 0; j < nl; j++) {
-	if ((i * ni + j) % 20 == 0) fprintf (POLYBENCH_DUMP_TARGET, "\n");
-	fprintf (POLYBENCH_DUMP_TARGET, DATA_PRINTF_MODIFIER, G[i][j]);
+	if ((i * ni + j) % 20 == 0) printf( "\n");
+	printf( DATA_PRINTF_MODIFIER, G[i][j]);
     }
   POLYBENCH_DUMP_END("G");
   POLYBENCH_DUMP_FINISH;

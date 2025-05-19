@@ -53,14 +53,14 @@ void print_array(int m, int n,
   POLYBENCH_DUMP_START;
   POLYBENCH_DUMP_BEGIN("s");
   for (i = 0; i < m; i++) {
-    if (i % 20 == 0) fprintf (POLYBENCH_DUMP_TARGET, "\n");
-    fprintf (POLYBENCH_DUMP_TARGET, DATA_PRINTF_MODIFIER, s[i]);
+    if (i % 20 == 0) printf( "\n");
+    printf( DATA_PRINTF_MODIFIER, s[i]);
   }
   POLYBENCH_DUMP_END("s");
   POLYBENCH_DUMP_BEGIN("q");
   for (i = 0; i < n; i++) {
-    if (i % 20 == 0) fprintf (POLYBENCH_DUMP_TARGET, "\n");
-    fprintf (POLYBENCH_DUMP_TARGET, DATA_PRINTF_MODIFIER, q[i]);
+    if (i % 20 == 0) printf( "\n");
+    printf( DATA_PRINTF_MODIFIER, q[i]);
   }
   POLYBENCH_DUMP_END("q");
   POLYBENCH_DUMP_FINISH;
