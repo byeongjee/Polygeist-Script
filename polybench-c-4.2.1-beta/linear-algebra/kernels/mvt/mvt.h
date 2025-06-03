@@ -11,7 +11,7 @@
 # define _MVT_H
 
 /* Default to LARGE_DATASET. */
-# if !defined(MINI_DATASET) && !defined(SMALL_DATASET) && !defined(MEDIUM_DATASET) && !defined(LARGE_DATASET) && !defined(EXTRALARGE_DATASET)
+# if !defined(MINI_DATASET) && !defined(SMALL_DATASET) && !defined(MEDIUM_DATASET) && !defined(LARGE_DATASET) && !defined(EXTRALARGE_DATASET) && !defined(CUSTOM_DATASET)
 #  define LARGE_DATASET
 # endif
 
@@ -37,6 +37,9 @@
 #   define N 4000
 #  endif
 
+#  ifdef CUSTOM_DATASET
+#   define N 32000
+#  endif
 
 #endif /* !(N) */
 

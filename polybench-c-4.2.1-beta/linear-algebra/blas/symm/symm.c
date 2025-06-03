@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 /* Include polybench common header. */
 #include <polybench.h>
@@ -36,14 +37,14 @@ void init_array(int m, int n,
   *beta = 1.2;
   for (i = 0; i < m; i++)
     for (j = 0; j < n; j++) {
-      C[i][j] = (DATA_TYPE) ((i+j) % 100) / m;
-      B[i][j] = (DATA_TYPE) ((n+i-j) % 100) / m;
+      C[i][j] = (DATA_TYPE) rand();
+      B[i][j] = (DATA_TYPE) rand();
     }
   for (i = 0; i < m; i++) {
     for (j = 0; j <=i; j++)
-      A[i][j] = (DATA_TYPE) ((i+j) % 100) / m;
+      A[i][j] = (DATA_TYPE) rand();
     for (j = i+1; j < m; j++)
-      A[i][j] = -999; //regions of arrays that should not be used
+      A[i][j] = (DATA_TYPE) rand(); //regions of arrays that should not be used
   }
 }
 
@@ -107,6 +108,7 @@ void kernel_symm(int m, int n,
 
 int main(int argc, char** argv)
 {
+  srand(0);
   /* Retrieve problem size. */
   int m = M;
   int n = N;

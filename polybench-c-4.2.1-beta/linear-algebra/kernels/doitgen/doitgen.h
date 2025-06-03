@@ -24,9 +24,9 @@
 #  endif
 
 #  ifdef SMALL_DATASET
-#   define NQ 20
-#   define NR 25
-#   define NP 30
+#   define NQ 24
+#   define NR 32
+#   define NP 40
 #  endif
 
 #  ifdef MEDIUM_DATASET
@@ -36,15 +36,15 @@
 #  endif
 
 #  ifdef LARGE_DATASET
-#   define NQ 140
-#   define NR 150
-#   define NP 160
+#   define NQ 144
+#   define NR 152
+#   define NP 168
 #  endif
 
 #  ifdef EXTRALARGE_DATASET
-#   define NQ 220
-#   define NR 250
-#   define NP 270
+#   define NQ 224
+#   define NR 256
+#   define NP 280
 #  endif
 
 

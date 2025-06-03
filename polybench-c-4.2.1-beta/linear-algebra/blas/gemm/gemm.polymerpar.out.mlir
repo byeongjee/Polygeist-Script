@@ -14,22 +14,22 @@ module attributes {llvm.data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i6
   llvm.func @fprintf(!llvm.ptr<struct<"struct._IO_FILE", (i32, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<struct<"struct._IO_marker", opaque>>, ptr<struct<"struct._IO_FILE">>, i32, i32, i64, i16, i8, array<1 x i8>, ptr<i8>, i64, ptr<struct<"struct._IO_codecvt", opaque>>, ptr<struct<"struct._IO_wide_data", opaque>>, ptr<struct<"struct._IO_FILE">>, ptr<i8>, i64, i32, array<20 x i8>)>>, !llvm.ptr<i8>, ...) -> i32
   llvm.mlir.global internal constant @str0("\00")
   llvm.func @strcmp(!llvm.ptr<i8>, !llvm.ptr<i8>) -> i32
-  func @main(%arg0: i32, %arg1: !llvm.ptr<ptr<i8>>) -> i32 {
-    %c2000_i32 = constant 2000 : i32
-    %c2300_i32 = constant 2300 : i32
-    %c2600_i32 = constant 2600 : i32
-    %c42_i32 = constant 42 : i32
-    %c0_i64 = constant 0 : i64
-    %true = constant true
-    %false = constant false
-    %cst = constant 1.500000e+00 : f64
-    %cst_0 = constant 1.200000e+00 : f64
-    %c2_i32 = constant 2 : i32
-    %c1_i32 = constant 1 : i32
-    %c0_i32 = constant 0 : i32
-    %c0 = constant 0 : index
-    %c1 = constant 1 : index
-    %c2600 = constant 2600 : index
+  func.func @main(%arg0: i32, %arg1: !llvm.ptr<ptr<i8>>) -> i32 {
+    %c2000_i32 = arith.constant 2000 : i32
+    %c2300_i32 = arith.constant 2300 : i32
+    %c2600_i32 = arith.constant 2600 : i32
+    %c42_i32 = arith.constant 42 : i32
+    %c0_i64 = arith.constant 0 : i64
+    %true = arith.constant true
+    %false = arith.constant false
+    %cst = arith.constant 1.500000e+00 : f64
+    %cst_0 = arith.constant 1.200000e+00 : f64
+    %c2_i32 = arith.constant 2 : i32
+    %c1_i32 = arith.constant 1 : i32
+    %c0_i32 = arith.constant 0 : i32
+    %c0 = arith.constant 0 : index
+    %c1 = arith.constant 1 : index
+    %c2600 = arith.constant 2600 : index
     %0 = memref.alloca() : memref<1xf64>
     %1 = memref.alloca() : memref<1xf64>
     %2 = memref.alloc() : memref<2000x2300xf64>
@@ -39,76 +39,76 @@ module attributes {llvm.data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i6
     affine.store %cst, %0[0] : memref<1xf64>
     affine.store %cst_0, %1[0] : memref<1xf64>
     %6:2 = scf.while (%arg2 = %c0_i32) : (i32) -> (i32, i32) {
-      %13 = cmpi slt, %arg2, %c2000_i32 : i32
+      %13 = arith.cmpi slt, %arg2, %c2000_i32 : i32
       scf.condition(%13) %c0_i32, %arg2 : i32, i32
     } do {
     ^bb0(%arg2: i32, %arg3: i32):  // no predecessors
-      %13 = index_cast %arg3 : i32 to index
+      %13 = arith.index_cast %arg3 : i32 to index
       %14 = scf.while (%arg4 = %c0_i32) : (i32) -> i32 {
-        %16 = cmpi slt, %arg4, %c2300_i32 : i32
+        %16 = arith.cmpi slt, %arg4, %c2300_i32 : i32
         scf.condition(%16) %arg4 : i32
       } do {
       ^bb0(%arg4: i32):  // no predecessors
-        %16 = index_cast %arg4 : i32 to index
-        %17 = muli %arg3, %arg4 : i32
-        %18 = addi %17, %c1_i32 : i32
-        %19 = remi_signed %18, %c2000_i32 : i32
-        %20 = sitofp %19 : i32 to f64
-        %21 = sitofp %c2000_i32 : i32 to f64
-        %22 = divf %20, %21 : f64
+        %16 = arith.index_cast %arg4 : i32 to index
+        %17 = arith.muli %arg3, %arg4 : i32
+        %18 = arith.addi %17, %c1_i32 : i32
+        %19 = arith.remsi %18, %c2000_i32 : i32
+        %20 = arith.sitofp %19 : i32 to f64
+        %21 = arith.sitofp %c2000_i32 : i32 to f64
+        %22 = arith.divf %20, %21 : f64
         memref.store %22, %2[%13, %16] : memref<2000x2300xf64>
-        %23 = addi %arg4, %c1_i32 : i32
+        %23 = arith.addi %arg4, %c1_i32 : i32
         scf.yield %23 : i32
       }
-      %15 = addi %arg3, %c1_i32 : i32
+      %15 = arith.addi %arg3, %c1_i32 : i32
       scf.yield %15 : i32
     }
     %7:2 = scf.while (%arg2 = %6#0) : (i32) -> (i32, i32) {
-      %13 = cmpi slt, %arg2, %c2000_i32 : i32
+      %13 = arith.cmpi slt, %arg2, %c2000_i32 : i32
       scf.condition(%13) %c0_i32, %arg2 : i32, i32
     } do {
     ^bb0(%arg2: i32, %arg3: i32):  // no predecessors
-      %13 = index_cast %arg3 : i32 to index
+      %13 = arith.index_cast %arg3 : i32 to index
       %14 = scf.for %arg4 = %c0 to %c2600 step %c1 iter_args(%arg5 = %c0_i32) -> (i32) {
-        %16 = index_cast %arg5 : i32 to index
-        %17 = addi %arg5, %c1_i32 : i32
-        %18 = muli %arg3, %17 : i32
-        %19 = remi_signed %18, %c2600_i32 : i32
-        %20 = sitofp %19 : i32 to f64
-        %21 = sitofp %c2600_i32 : i32 to f64
-        %22 = divf %20, %21 : f64
+        %16 = arith.index_cast %arg5 : i32 to index
+        %17 = arith.addi %arg5, %c1_i32 : i32
+        %18 = arith.muli %arg3, %17 : i32
+        %19 = arith.remsi %18, %c2600_i32 : i32
+        %20 = arith.sitofp %19 : i32 to f64
+        %21 = arith.sitofp %c2600_i32 : i32 to f64
+        %22 = arith.divf %20, %21 : f64
         memref.store %22, %3[%13, %16] : memref<2000x2600xf64>
         scf.yield %17 : i32
       }
-      %15 = addi %arg3, %c1_i32 : i32
+      %15 = arith.addi %arg3, %c1_i32 : i32
       scf.yield %15 : i32
     }
     %8 = scf.while (%arg2 = %7#0) : (i32) -> i32 {
-      %13 = cmpi slt, %arg2, %c2600_i32 : i32
+      %13 = arith.cmpi slt, %arg2, %c2600_i32 : i32
       scf.condition(%13) %arg2 : i32
     } do {
     ^bb0(%arg2: i32):  // no predecessors
-      %13 = index_cast %arg2 : i32 to index
+      %13 = arith.index_cast %arg2 : i32 to index
       %14 = scf.while (%arg3 = %c0_i32) : (i32) -> i32 {
-        %16 = cmpi slt, %arg3, %c2300_i32 : i32
+        %16 = arith.cmpi slt, %arg3, %c2300_i32 : i32
         scf.condition(%16) %arg3 : i32
       } do {
       ^bb0(%arg3: i32):  // no predecessors
-        %16 = index_cast %arg3 : i32 to index
-        %17 = addi %arg3, %c2_i32 : i32
-        %18 = muli %arg2, %17 : i32
-        %19 = remi_signed %18, %c2300_i32 : i32
-        %20 = sitofp %19 : i32 to f64
-        %21 = sitofp %c2300_i32 : i32 to f64
-        %22 = divf %20, %21 : f64
+        %16 = arith.index_cast %arg3 : i32 to index
+        %17 = arith.addi %arg3, %c2_i32 : i32
+        %18 = arith.muli %arg2, %17 : i32
+        %19 = arith.remsi %18, %c2300_i32 : i32
+        %20 = arith.sitofp %19 : i32 to f64
+        %21 = arith.sitofp %c2300_i32 : i32 to f64
+        %22 = arith.divf %20, %21 : f64
         memref.store %22, %4[%13, %16] : memref<2600x2300xf64>
-        %23 = addi %arg3, %c1_i32 : i32
+        %23 = arith.addi %arg3, %c1_i32 : i32
         scf.yield %23 : i32
       }
-      %15 = addi %arg2, %c1_i32 : i32
+      %15 = arith.addi %arg2, %c1_i32 : i32
       scf.yield %15 : i32
     }
-    call @polybench_timer_start() : () -> ()
+    func.call @polybench_timer_start() : () -> ()
     %9 = affine.load %0[0] : memref<1xf64>
     %10 = affine.load %1[0] : memref<1xf64>
     affine.for %arg2 = 0 to 63 {
@@ -116,7 +116,7 @@ module attributes {llvm.data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i6
         affine.for %arg4 = #map0(%arg2) to min #map1(%arg2) {
           affine.for %arg5 = #map0(%arg3) to min #map2(%arg3) {
             %13 = affine.load %2[%arg4, %arg5] : memref<2000x2300xf64>
-            %14 = mulf %13, %10 : f64
+            %14 = arith.mulf %13, %10 : f64
             affine.store %14, %2[%arg4, %arg5] : memref<2000x2300xf64>
           }
         }
@@ -130,10 +130,10 @@ module attributes {llvm.data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i6
               affine.for %arg7 = #map0(%arg3) to min #map2(%arg3) {
                 %13 = affine.load %2[%arg5, %arg7] : memref<2000x2300xf64>
                 %14 = affine.load %3[%arg5, %arg6] : memref<2000x2600xf64>
-                %15 = mulf %9, %14 : f64
+                %15 = arith.mulf %9, %14 : f64
                 %16 = affine.load %4[%arg6, %arg7] : memref<2600x2300xf64>
-                %17 = mulf %15, %16 : f64
-                %18 = addf %13, %17 : f64
+                %17 = arith.mulf %15, %16 : f64
+                %18 = arith.addf %13, %17 : f64
                 affine.store %18, %2[%arg5, %arg7] : memref<2000x2300xf64>
               }
             }
@@ -141,53 +141,53 @@ module attributes {llvm.data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i6
         }
       }
     } {scop.parallelizable}
-    call @polybench_timer_stop() : () -> ()
-    call @polybench_timer_print() : () -> ()
-    %11 = cmpi sgt, %arg0, %c42_i32 : i32
+    func.call @polybench_timer_stop() : () -> ()
+    func.call @polybench_timer_print() : () -> ()
+    %11 = arith.cmpi sgt, %arg0, %c42_i32 : i32
     %12 = scf.if %11 -> (i1) {
       %13 = llvm.getelementptr %arg1[%c0_i64] : (!llvm.ptr<ptr<i8>>, i64) -> !llvm.ptr<ptr<i8>>
       %14 = llvm.load %13 : !llvm.ptr<ptr<i8>>
       %15 = llvm.mlir.addressof @str0 : !llvm.ptr<array<1 x i8>>
       %16 = llvm.getelementptr %15[%c0_i64, %c0_i64] : (!llvm.ptr<array<1 x i8>>, i64, i64) -> !llvm.ptr<i8>
       %17 = llvm.call @strcmp(%14, %16) : (!llvm.ptr<i8>, !llvm.ptr<i8>) -> i32
-      %18 = trunci %17 : i32 to i1
-      %19 = xor %18, %true : i1
+      %18 = arith.trunci %17 : i32 to i1
+      %19 = arith.xori %18, %true : i1
       scf.yield %19 : i1
     } else {
       scf.yield %false : i1
     }
     scf.if %12 {
-      call @print_array(%c2000_i32, %c2300_i32, %5) : (i32, i32, memref<?x2300xf64>) -> ()
+      func.call @print_array(%c2000_i32, %c2300_i32, %5) : (i32, i32, memref<?x2300xf64>) -> ()
     }
     memref.dealloc %2 : memref<2000x2300xf64>
     memref.dealloc %3 : memref<2000x2600xf64>
     memref.dealloc %4 : memref<2600x2300xf64>
     return %c0_i32 : i32
   }
-  func private @polybench_timer_start()
-  func private @polybench_timer_stop()
-  func private @polybench_timer_print()
-  func private @S0(%arg0: memref<?x2300xf64>, %arg1: index, %arg2: index, %arg3: f64) attributes {scop.stmt} {
+  func.func private @polybench_timer_start()
+  func.func private @polybench_timer_stop()
+  func.func private @polybench_timer_print()
+  func.func private @S0(%arg0: memref<?x2300xf64>, %arg1: index, %arg2: index, %arg3: f64) attributes {scop.stmt} {
     %0 = affine.load %arg0[symbol(%arg1), symbol(%arg2)] : memref<?x2300xf64>
-    %1 = mulf %0, %arg3 : f64
+    %1 = arith.mulf %0, %arg3 : f64
     affine.store %1, %arg0[symbol(%arg1), symbol(%arg2)] : memref<?x2300xf64>
     return
   }
-  func private @S1(%arg0: memref<?x2300xf64>, %arg1: index, %arg2: index, %arg3: memref<?x2300xf64>, %arg4: index, %arg5: f64, %arg6: memref<?x2600xf64>) attributes {scop.stmt} {
+  func.func private @S1(%arg0: memref<?x2300xf64>, %arg1: index, %arg2: index, %arg3: memref<?x2300xf64>, %arg4: index, %arg5: f64, %arg6: memref<?x2600xf64>) attributes {scop.stmt} {
     %0 = affine.load %arg0[symbol(%arg1), symbol(%arg2)] : memref<?x2300xf64>
     %1 = affine.load %arg6[symbol(%arg1), symbol(%arg4)] : memref<?x2600xf64>
-    %2 = mulf %arg5, %1 : f64
+    %2 = arith.mulf %arg5, %1 : f64
     %3 = affine.load %arg3[symbol(%arg4), symbol(%arg2)] : memref<?x2300xf64>
-    %4 = mulf %2, %3 : f64
-    %5 = addf %0, %4 : f64
+    %4 = arith.mulf %2, %3 : f64
+    %5 = arith.addf %0, %4 : f64
     affine.store %5, %arg0[symbol(%arg1), symbol(%arg2)] : memref<?x2300xf64>
     return
   }
-  func private @print_array(%arg0: i32, %arg1: i32, %arg2: memref<?x2300xf64>) {
-    %c0_i64 = constant 0 : i64
-    %c0_i32 = constant 0 : i32
-    %c20_i32 = constant 20 : i32
-    %c1_i32 = constant 1 : i32
+  func.func private @print_array(%arg0: i32, %arg1: i32, %arg2: memref<?x2300xf64>) {
+    %c0_i64 = arith.constant 0 : i64
+    %c0_i32 = arith.constant 0 : i32
+    %c20_i32 = arith.constant 20 : i32
+    %c1_i32 = arith.constant 1 : i32
     %0 = llvm.mlir.addressof @stderr : !llvm.ptr<ptr<struct<"struct._IO_FILE", (i32, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<struct<"struct._IO_marker", opaque>>, ptr<struct<"struct._IO_FILE">>, i32, i32, i64, i16, i8, array<1 x i8>, ptr<i8>, i64, ptr<struct<"struct._IO_codecvt", opaque>>, ptr<struct<"struct._IO_wide_data", opaque>>, ptr<struct<"struct._IO_FILE">>, ptr<i8>, i64, i32, array<20 x i8>)>>>
     %1 = llvm.load %0 : !llvm.ptr<ptr<struct<"struct._IO_FILE", (i32, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<struct<"struct._IO_marker", opaque>>, ptr<struct<"struct._IO_FILE">>, i32, i32, i64, i16, i8, array<1 x i8>, ptr<i8>, i64, ptr<struct<"struct._IO_codecvt", opaque>>, ptr<struct<"struct._IO_wide_data", opaque>>, ptr<struct<"struct._IO_FILE">>, ptr<i8>, i64, i32, array<20 x i8>)>>>
     %2 = llvm.mlir.addressof @str1 : !llvm.ptr<array<23 x i8>>
@@ -201,21 +201,21 @@ module attributes {llvm.data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i6
     %10 = llvm.getelementptr %9[%c0_i64, %c0_i64] : (!llvm.ptr<array<2 x i8>>, i64, i64) -> !llvm.ptr<i8>
     %11 = llvm.call @fprintf(%6, %8, %10) : (!llvm.ptr<struct<"struct._IO_FILE", (i32, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<struct<"struct._IO_marker", opaque>>, ptr<struct<"struct._IO_FILE">>, i32, i32, i64, i16, i8, array<1 x i8>, ptr<i8>, i64, ptr<struct<"struct._IO_codecvt", opaque>>, ptr<struct<"struct._IO_wide_data", opaque>>, ptr<struct<"struct._IO_FILE">>, ptr<i8>, i64, i32, array<20 x i8>)>>, !llvm.ptr<i8>, !llvm.ptr<i8>) -> i32
     %12 = scf.while (%arg3 = %c0_i32) : (i32) -> i32 {
-      %25 = cmpi slt, %arg3, %arg0 : i32
+      %25 = arith.cmpi slt, %arg3, %arg0 : i32
       scf.condition(%25) %arg3 : i32
     } do {
     ^bb0(%arg3: i32):  // no predecessors
-      %25 = index_cast %arg3 : i32 to index
+      %25 = arith.index_cast %arg3 : i32 to index
       %26 = scf.while (%arg4 = %c0_i32) : (i32) -> i32 {
-        %28 = cmpi slt, %arg4, %arg1 : i32
+        %28 = arith.cmpi slt, %arg4, %arg1 : i32
         scf.condition(%28) %arg4 : i32
       } do {
       ^bb0(%arg4: i32):  // no predecessors
-        %28 = index_cast %arg4 : i32 to index
-        %29 = muli %arg3, %arg0 : i32
-        %30 = addi %29, %arg4 : i32
-        %31 = remi_signed %30, %c20_i32 : i32
-        %32 = cmpi eq, %31, %c0_i32 : i32
+        %28 = arith.index_cast %arg4 : i32 to index
+        %29 = arith.muli %arg3, %arg0 : i32
+        %30 = arith.addi %29, %arg4 : i32
+        %31 = arith.remsi %30, %c20_i32 : i32
+        %32 = arith.cmpi eq, %31, %c0_i32 : i32
         scf.if %32 {
           %40 = llvm.mlir.addressof @stderr : !llvm.ptr<ptr<struct<"struct._IO_FILE", (i32, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<struct<"struct._IO_marker", opaque>>, ptr<struct<"struct._IO_FILE">>, i32, i32, i64, i16, i8, array<1 x i8>, ptr<i8>, i64, ptr<struct<"struct._IO_codecvt", opaque>>, ptr<struct<"struct._IO_wide_data", opaque>>, ptr<struct<"struct._IO_FILE">>, ptr<i8>, i64, i32, array<20 x i8>)>>>
           %41 = llvm.load %40 : !llvm.ptr<ptr<struct<"struct._IO_FILE", (i32, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<struct<"struct._IO_marker", opaque>>, ptr<struct<"struct._IO_FILE">>, i32, i32, i64, i16, i8, array<1 x i8>, ptr<i8>, i64, ptr<struct<"struct._IO_codecvt", opaque>>, ptr<struct<"struct._IO_wide_data", opaque>>, ptr<struct<"struct._IO_FILE">>, ptr<i8>, i64, i32, array<20 x i8>)>>>
@@ -229,10 +229,10 @@ module attributes {llvm.data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i6
         %36 = llvm.getelementptr %35[%c0_i64, %c0_i64] : (!llvm.ptr<array<8 x i8>>, i64, i64) -> !llvm.ptr<i8>
         %37 = memref.load %arg2[%25, %28] : memref<?x2300xf64>
         %38 = llvm.call @fprintf(%34, %36, %37) : (!llvm.ptr<struct<"struct._IO_FILE", (i32, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<struct<"struct._IO_marker", opaque>>, ptr<struct<"struct._IO_FILE">>, i32, i32, i64, i16, i8, array<1 x i8>, ptr<i8>, i64, ptr<struct<"struct._IO_codecvt", opaque>>, ptr<struct<"struct._IO_wide_data", opaque>>, ptr<struct<"struct._IO_FILE">>, ptr<i8>, i64, i32, array<20 x i8>)>>, !llvm.ptr<i8>, f64) -> i32
-        %39 = addi %arg4, %c1_i32 : i32
+        %39 = arith.addi %arg4, %c1_i32 : i32
         scf.yield %39 : i32
       }
-      %27 = addi %arg3, %c1_i32 : i32
+      %27 = arith.addi %arg3, %c1_i32 : i32
       scf.yield %27 : i32
     }
     %13 = llvm.mlir.addressof @stderr : !llvm.ptr<ptr<struct<"struct._IO_FILE", (i32, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<i8>, ptr<struct<"struct._IO_marker", opaque>>, ptr<struct<"struct._IO_FILE">>, i32, i32, i64, i16, i8, array<1 x i8>, ptr<i8>, i64, ptr<struct<"struct._IO_codecvt", opaque>>, ptr<struct<"struct._IO_wide_data", opaque>>, ptr<struct<"struct._IO_FILE">>, ptr<i8>, i64, i32, array<20 x i8>)>>>

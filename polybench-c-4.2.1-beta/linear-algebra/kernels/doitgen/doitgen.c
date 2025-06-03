@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdlib.h>
 #include <math.h>
 
 /* Include polybench common header. */
@@ -32,10 +33,10 @@ void init_array(int nr, int nq, int np,
   for (i = 0; i < nr; i++)
     for (j = 0; j < nq; j++)
       for (k = 0; k < np; k++)
-	A[i][j][k] = (DATA_TYPE) ((i*j + k)%np) / np;
+	A[i][j][k] = (DATA_TYPE) rand();
   for (i = 0; i < np; i++)
     for (j = 0; j < np; j++)
-      C4[i][j] = (DATA_TYPE) (i*j % np) / np;
+      C4[i][j] = (DATA_TYPE) rand();
 }
 
 
@@ -87,6 +88,7 @@ void kernel_doitgen(int nr, int nq, int np,
 
 int main(int argc, char** argv)
 {
+  srand(0);
   /* Retrieve problem size. */
   int nr = NR;
   int nq = NQ;

@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 /* Include polybench common header. */
 #include <polybench.h>
@@ -31,8 +32,8 @@ void init_array (int n,
 
   for (i = 0; i < n; i++)
       {
-	A[i] = ((DATA_TYPE) i+ 2) / n;
-	B[i] = ((DATA_TYPE) i+ 3) / n;
+	A[i] = (DATA_TYPE) rand();
+	B[i] = (DATA_TYPE) rand();
       }
 }
 
@@ -83,6 +84,7 @@ void kernel_jacobi_1d(int tsteps,
 
 int main(int argc, char** argv)
 {
+  srand(0);
   /* Retrieve problem size. */
   int n = N;
   int tsteps = TSTEPS;

@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 /* Include polybench common header. */
 #include <polybench.h>
@@ -36,12 +37,12 @@ void init_array (int n,
 
   //base is AGCT/0..3
   for (i=0; i <n; i++) {
-     seq[i] = (base)((i+1)%4);
+     seq[i] = (base) rand();
   }
 
   for (i=0; i <n; i++)
      for (j=0; j <n; j++)
-       table[i][j] = 0;
+       table[i][j] = rand();
 }
 
 
@@ -111,6 +112,7 @@ void kernel_nussinov(int n, base POLYBENCH_1D(seq,N,n),
 
 int main(int argc, char** argv)
 {
+  srand(0);
   /* Retrieve problem size. */
   int n = N;
 

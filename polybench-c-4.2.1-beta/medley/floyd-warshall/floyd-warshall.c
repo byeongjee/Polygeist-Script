@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 /* Include polybench common header. */
 #include <polybench.h>
@@ -30,9 +31,9 @@ void init_array (int n,
 
   for (i = 0; i < n; i++)
     for (j = 0; j < n; j++) {
-      path[i][j] = i*j%7+1;
+      path[i][j] = (DATA_TYPE) rand();
       if ((i+j)%13 == 0 || (i+j)%7==0 || (i+j)%11 == 0)
-         path[i][j] = 999;
+         path[i][j] = (DATA_TYPE) rand();
     }
 }
 
@@ -81,6 +82,7 @@ void kernel_floyd_warshall(int n,
 
 int main(int argc, char** argv)
 {
+  srand(0);
   /* Retrieve problem size. */
   int n = N;
 

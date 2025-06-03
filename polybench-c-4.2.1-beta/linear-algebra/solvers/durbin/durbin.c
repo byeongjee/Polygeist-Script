@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 /* Include polybench common header. */
 #include <polybench.h>
@@ -30,8 +31,8 @@ void init_array (int n,
 
   for (i = 0; i < n; i++)
     {
-      r[i] = (n+1-i);
-    }
+    r[i] = (DATA_TYPE) rand();
+  }
 }
 
 
@@ -97,6 +98,7 @@ void kernel_durbin(int n,
 
 int main(int argc, char** argv)
 {
+  srand(0);
   /* Retrieve problem size. */
   int n = N;
 

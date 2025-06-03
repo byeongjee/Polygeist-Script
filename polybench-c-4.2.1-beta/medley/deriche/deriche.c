@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 /* Include polybench common header. */
 #include <polybench.h>
@@ -34,7 +35,7 @@ void init_array (int w, int h, DATA_TYPE* alpha,
   //input should be between 0 and 1 (grayscale image pixel)
   for (i = 0; i < w; i++)
      for (j = 0; j < h; j++)
-	imgIn[i][j] = (DATA_TYPE) ((313*i+991*j)%65536) / 65535.0f;
+	imgIn[i][j] = (DATA_TYPE) rand();
 }
 
 
@@ -157,6 +158,7 @@ void kernel_deriche(int w, int h, DATA_TYPE alpha,
 
 int main(int argc, char** argv)
 {
+  srand(0);
   /* Retrieve problem size. */
   int w = W;
   int h = H;

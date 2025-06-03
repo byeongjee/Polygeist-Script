@@ -23,7 +23,7 @@
 #  endif
 
 #  ifdef SMALL_DATASET
-#   define M 60
+#   define M 64
 #   define N 80
 #  endif
 

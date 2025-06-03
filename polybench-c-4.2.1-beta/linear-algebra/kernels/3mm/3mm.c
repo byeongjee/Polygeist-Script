@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdlib.h>
 #include <math.h>
 
 /* Include polybench common header. */
@@ -33,16 +34,16 @@ void init_array(int ni, int nj, int nk, int nl, int nm,
 
   for (i = 0; i < ni; i++)
     for (j = 0; j < nk; j++)
-      A[i][j] = (DATA_TYPE) ((i*j+1) % ni) / (5*ni);
+      A[i][j] = (DATA_TYPE) rand();
   for (i = 0; i < nk; i++)
     for (j = 0; j < nj; j++)
-      B[i][j] = (DATA_TYPE) ((i*(j+1)+2) % nj) / (5*nj);
+      B[i][j] = (DATA_TYPE) rand();
   for (i = 0; i < nj; i++)
     for (j = 0; j < nm; j++)
-      C[i][j] = (DATA_TYPE) (i*(j+3) % nl) / (5*nl);
+      C[i][j] = (DATA_TYPE) rand();
   for (i = 0; i < nm; i++)
     for (j = 0; j < nl; j++)
-      D[i][j] = (DATA_TYPE) ((i*(j+2)+2) % nk) / (5*nk);
+      D[i][j] = (DATA_TYPE) rand();
 }
 
 
@@ -112,6 +113,7 @@ void kernel_3mm(int ni, int nj, int nk, int nl, int nm,
 
 int main(int argc, char** argv)
 {
+  srand(0);
   /* Retrieve problem size. */
   int ni = NI;
   int nj = NJ;

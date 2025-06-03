@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 /* Include polybench common header. */
 #include <polybench.h>
@@ -32,12 +33,12 @@ void init_array(int m, int n,
 
   for (i = 0; i < m; i++)
     for (j = 0; j < n; j++) {
-      A[i][j] = (((DATA_TYPE) ((i*j) % m) / m )*100) + 10;
-      Q[i][j] = 0.0;
+      A[i][j] = (DATA_TYPE) rand();
+      Q[i][j] = rand();
     }
   for (i = 0; i < n; i++)
     for (j = 0; j < n; j++)
-      R[i][j] = 0.0;
+      R[i][j] = rand();
 }
 
 
@@ -110,6 +111,7 @@ void kernel_gramschmidt(int m, int n,
 
 int main(int argc, char** argv)
 {
+  srand(0);
   /* Retrieve problem size. */
   int m = M;
   int n = N;

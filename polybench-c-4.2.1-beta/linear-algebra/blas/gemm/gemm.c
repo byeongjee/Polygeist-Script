@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdlib.h>
 #include <math.h>
 
 /* Include polybench common header. */
@@ -36,13 +37,13 @@ void init_array(int ni, int nj, int nk,
   *beta = 1.2;
   for (i = 0; i < ni; i++)
     for (j = 0; j < nj; j++)
-      C[i][j] = (DATA_TYPE) ((i*j+1) % ni) / ni;
+      C[i][j] = (DATA_TYPE) rand();
   for (i = 0; i < ni; i++)
     for (j = 0; j < nk; j++)
-      A[i][j] = (DATA_TYPE) (i*(j+1) % nk) / nk;
+      A[i][j] = (DATA_TYPE) rand();
   for (i = 0; i < nk; i++)
     for (j = 0; j < nj; j++)
-      B[i][j] = (DATA_TYPE) (i*(j+2) % nj) / nj;
+      B[i][j] = (DATA_TYPE) rand();
 }
 
 
@@ -85,7 +86,6 @@ void kernel_gemm(int ni, int nj, int nk,
 //A is NIxNK
 //B is NKxNJ
 //C is NIxNJ
-#pragma scop
   for (i = 0; i < _PB_NI; i++) {
     for (j = 0; j < _PB_NJ; j++)
 	C[i][j] *= beta;
@@ -94,13 +94,12 @@ void kernel_gemm(int ni, int nj, int nk,
 	  C[i][j] += alpha * A[i][k] * B[k][j];
     }
   }
-#pragma endscop
-
 }
 
 
 int main(int argc, char** argv)
 {
+  srand(0);
   /* Retrieve problem size. */
   int ni = NI;
   int nj = NJ;

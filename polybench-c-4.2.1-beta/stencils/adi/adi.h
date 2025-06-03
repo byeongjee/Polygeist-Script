@@ -24,7 +24,7 @@
 
 #  ifdef SMALL_DATASET
 #   define TSTEPS 40
-#   define N 60
+#   define N 64
 #  endif
 
 #  ifdef MEDIUM_DATASET
@@ -33,8 +33,8 @@
 #  endif
 
 #  ifdef LARGE_DATASET
-#   define TSTEPS 500
-#   define N 1000
+#   define TSTEPS 600
+#   define N 1200
 #  endif
 
 #  ifdef EXTRALARGE_DATASET

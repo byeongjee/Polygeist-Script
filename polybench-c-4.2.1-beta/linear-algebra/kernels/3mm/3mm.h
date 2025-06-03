@@ -27,9 +27,9 @@
 
 #  ifdef SMALL_DATASET
 #   define NI 40
-#   define NJ 50
-#   define NK 60
-#   define NL 70
+#   define NJ 56
+#   define NK 64
+#   define NL 72
 #   define NM 80
 #  endif
 
@@ -43,9 +43,9 @@
 
 #  ifdef LARGE_DATASET
 #   define NI 800
-#   define NJ 900
+#   define NJ 904
 #   define NK 1000
-#   define NL 1100
+#   define NL 1104
 #   define NM 1200
 #  endif
 

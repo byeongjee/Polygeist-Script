@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 /* Include polybench common header. */
 #include <polybench.h>
@@ -34,19 +35,19 @@ void init_array (int n,
 
   for (i = 0; i < n; i++)
     {
-      x[i] = 0;
-      y[i] = 0;
-      b[i] = (i+1)/fn/2.0 + 4;
+      x[i] = rand();
+      y[i] = rand();
+      b[i] = rand();
     }
 
   for (i = 0; i < n; i++)
     {
       for (j = 0; j <= i; j++)
-	A[i][j] = (DATA_TYPE)(-j % n) / n + 1;
+	A[i][j] = (DATA_TYPE) rand();
       for (j = i+1; j < n; j++) {
-	A[i][j] = 0;
+	A[i][j] = rand();
       }
-      A[i][i] = 1;
+      A[i][i] = rand();
     }
 
   /* Make the matrix positive semi-definite. */
@@ -139,6 +140,7 @@ void kernel_ludcmp(int n,
 
 int main(int argc, char** argv)
 {
+  srand(0);
   /* Retrieve problem size. */
   int n = N;
 

@@ -22,7 +22,7 @@
 #  endif
 
 #  ifdef SMALL_DATASET
-#   define N 180
+#   define N 184
 #  endif
 
 #  ifdef MEDIUM_DATASET
@@ -30,11 +30,11 @@
 #  endif
 
 #  ifdef LARGE_DATASET
-#   define N 2500
+#   define N 2504
 #  endif
 
 #  ifdef EXTRALARGE_DATASET
-#   define N 5500
+#   define N 5504
 #  endif
 
 

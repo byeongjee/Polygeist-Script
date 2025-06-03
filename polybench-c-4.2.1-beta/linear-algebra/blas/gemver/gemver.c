@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 /* Include polybench common header. */
 #include <polybench.h>
@@ -45,16 +46,17 @@ void init_array (int n,
 
   for (i = 0; i < n; i++)
     {
-      u1[i] = i;
-      u2[i] = ((i+1)/fn)/2.0;
-      v1[i] = ((i+1)/fn)/4.0;
-      v2[i] = ((i+1)/fn)/6.0;
-      y[i] = ((i+1)/fn)/8.0;
-      z[i] = ((i+1)/fn)/9.0;
-      x[i] = 0.0;
-      w[i] = 0.0;
+      u1[i] = (DATA_TYPE) rand();
+      u2[i] = (DATA_TYPE) rand();
+      v1[i] = (DATA_TYPE) rand();
+      v2[i] = (DATA_TYPE) rand();
+      w[i] = (DATA_TYPE) rand();
+      y[i] = (DATA_TYPE) rand();
+      z[i] = (DATA_TYPE) rand();
+      x[i] = (DATA_TYPE) rand();
+      w[i] = (DATA_TYPE) rand();
       for (j = 0; j < n; j++)
-        A[i][j] = (DATA_TYPE) (i*j % n) / n;
+        A[i][j] = (DATA_TYPE) rand();
     }
 }
 
@@ -119,6 +121,7 @@ void kernel_gemver(int n,
 
 int main(int argc, char** argv)
 {
+  srand(0);
   /* Retrieve problem size. */
   int n = N;
 

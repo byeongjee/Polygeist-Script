@@ -25,7 +25,7 @@
 
 #  ifdef SMALL_DATASET
 #   define TMAX 40
-#   define NX 60
+#   define NX 64
 #   define NY 80
 #  endif
 
@@ -36,9 +36,9 @@
 #  endif
 
 #  ifdef LARGE_DATASET
-#   define TMAX 500
-#   define NX 1000
-#   define NY 1200
+#   define TMAX 600
+#   define NX 1200
+#   define NY 1400
 #  endif
 
 #  ifdef EXTRALARGE_DATASET

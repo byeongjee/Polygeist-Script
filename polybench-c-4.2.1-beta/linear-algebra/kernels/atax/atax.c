@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 /* Include polybench common header. */
 #include <polybench.h>
@@ -32,10 +33,10 @@ void init_array (int m, int n,
   fn = (DATA_TYPE)n;
 
   for (i = 0; i < n; i++)
-      x[i] = 1 + (i / fn);
+      x[i] = (DATA_TYPE) rand();
   for (i = 0; i < m; i++)
     for (j = 0; j < n; j++)
-      A[i][j] = (DATA_TYPE) ((i+j) % n) / (5*m);
+      A[i][j] = (DATA_TYPE) rand();
 }
 
 
@@ -88,6 +89,7 @@ void kernel_atax(int m, int n,
 
 int main(int argc, char** argv)
 {
+  srand(0);
   /* Retrieve problem size. */
   int m = M;
   int n = N;

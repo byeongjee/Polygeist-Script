@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 /* Include polybench common header. */
 #include <polybench.h>
@@ -34,13 +35,13 @@ void init_array (int tmax,
   int i, j;
 
   for (i = 0; i < tmax; i++)
-    _fict_[i] = (DATA_TYPE) i;
+    _fict_[i] = (DATA_TYPE) rand();
   for (i = 0; i < nx; i++)
     for (j = 0; j < ny; j++)
       {
-	ex[i][j] = ((DATA_TYPE) i*(j+1)) / nx;
-	ey[i][j] = ((DATA_TYPE) i*(j+2)) / ny;
-	hz[i][j] = ((DATA_TYPE) i*(j+3)) / nx;
+	ex[i][j] = (DATA_TYPE) rand();
+	ey[i][j] = (DATA_TYPE) rand();
+	hz[i][j] = (DATA_TYPE) rand();
       }
 }
 
@@ -64,7 +65,6 @@ void print_array(int nx,
       printf( DATA_PRINTF_MODIFIER, ex[i][j]);
     }
   POLYBENCH_DUMP_END("ex");
-  POLYBENCH_DUMP_FINISH;
 
   POLYBENCH_DUMP_BEGIN("ey");
   for (i = 0; i < nx; i++)
@@ -81,6 +81,7 @@ void print_array(int nx,
       printf( DATA_PRINTF_MODIFIER, hz[i][j]);
     }
   POLYBENCH_DUMP_END("hz");
+  POLYBENCH_DUMP_FINISH;
 }
 
 
@@ -121,6 +122,7 @@ void kernel_fdtd_2d(int tmax,
 
 int main(int argc, char** argv)
 {
+  srand(0);
   /* Retrieve problem size. */
   int tmax = TMAX;
   int nx = NX;
